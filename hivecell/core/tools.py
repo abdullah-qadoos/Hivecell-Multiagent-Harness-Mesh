@@ -243,10 +243,14 @@ class ToolRouter:
         if not self.rules.test_cmd:
             return 0, "this agent has no done check"
         cmd = shlex.split(self.rules.test_cmd)
-        if cmd[0] == "python":
-            cmd[0] = sys.executable  # the harness's interpreter, which has pytest
+        if cmd[0] == "python" and not getattr(sys, "frozen", False):
+            # from source: the harness's own interpreter, which has pytest. In the packaged app sys.executable
+            # is Hivecell.exe, so "python" is left to the Python installed on the user's PATH.
+            cmd[0] = sys.executable
         try:
             r = subprocess.run(cmd, cwd=self.root, capture_output=True, text=True, timeout=300)
         except subprocess.TimeoutExpired:
             return 124, "tests timed out after 300s"
+        except FileNotFoundError:
+            return 127, f"{cmd[0]!r} was not found. Install it, or change this agent's done check."
         return r.returncode, (r.stdout + r.stderr)[-MAX_OUTPUT:]

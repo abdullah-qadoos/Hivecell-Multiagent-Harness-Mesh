@@ -85,7 +85,17 @@ flowchart TD
 
 ## Quick start
 
-You need Windows 10 or 11, Python 3.13+, [uv](https://docs.astral.sh/uv/) and git. Docker is only needed for agents that run commands.
+### Download the app (Windows)
+
+1. Download `Hivecell-v0.1.0-windows-x64.zip` from [Releases](https://github.com/abdullah-qadoos/Hivecell-AI-Multi-Agent-Harness/releases/latest).
+2. Unzip it anywhere and run `Hivecell.exe`. No Python install needed for the app itself.
+3. The app isn't code-signed yet, so Windows SmartScreen may warn the first time: click **More info**, then **Run anyway**.
+
+You also need [git](https://git-scm.com/). Agents whose done check runs Python tests need Python on your PATH, and agents that run commands need Docker.
+
+### Or run from source
+
+You need Windows 10 or 11, Python 3.13+, [uv](https://docs.astral.sh/uv/) and git.
 
 ```powershell
 git clone https://github.com/abdullah-qadoos/Hivecell-AI-Multi-Agent-Harness.git
@@ -94,7 +104,9 @@ uv sync
 uv run hivecell-app
 ```
 
-Then, in the app:
+Build the Windows app yourself with `uv run pyinstaller packaging/hivecell.spec --noconfirm` (output in `dist/Hivecell/`).
+
+### First steps in the app
 
 1. **API keys:** add a key for at least one provider (Gemini has a free tier, NVIDIA gives free credits).
 2. **Open repository:** any git repo with at least one commit.

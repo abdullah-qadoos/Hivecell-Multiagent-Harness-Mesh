@@ -9,3 +9,5 @@ __pycache__/
 # internal notes, not part of the app
 DECISIONS.md
 docs/
+dist/
+build/
