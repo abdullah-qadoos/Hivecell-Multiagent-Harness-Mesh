@@ -233,10 +233,4 @@ Found a security problem? Please open an issue without the exploit details, and 
 
 ---
 
-## License
-
-MIT, see [LICENSE](LICENSE). Use it, change it, ship it.
-
----
-
 <p align="center">Built by <a href="https://github.com/abdullah-qadoos">Muhammad Abdullah Noor</a> · <a href="https://linkedin.com/in/muhammad-abdullah-noor">LinkedIn</a></p>
