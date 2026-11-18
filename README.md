@@ -7,7 +7,7 @@
 <p align="center"><strong>A multi-agent harness with a built-in coordination mesh.</strong><br>
 Give it a spec. Specialist agents, each with their own rules, build the project in parallel, talk to each other, and ship only what passes tests and review.</p>
 
-<p align="center">Free and open source.</p>
+<p align="center">Free to download. Source code public to read.</p>
 
 ---
 
@@ -221,13 +221,9 @@ tests/         57 tests, run with: uv run pytest
 
 ---
 
-## Contributing
+## Feedback
 
-Hivecell is fully open source, and contributions of any size are welcome: bug reports, ideas, new agent templates, new model providers, or code.
-
-1. Fork the repo and create a branch.
-2. `uv sync`, make your change, and run `uv run pytest`.
-3. Open a pull request saying what changed and why.
+Bug reports and ideas are welcome: open an issue. The source code is public to read, but all rights are reserved; please ask before reusing or redistributing it.
 
 Found a security problem? Please open an issue without the exploit details, and it will be followed up privately.
 
