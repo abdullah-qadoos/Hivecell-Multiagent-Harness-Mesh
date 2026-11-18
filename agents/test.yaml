@@ -1,0 +1,13 @@
+name: test
+category: coding
+model: anthropic/claude-haiku-5-5
+role: Write black-box tests for the backend's public behaviour in tests/
+owns: ["tests/**"]
+can_read: ["services/api/**", "contracts/**", "docs/**"]
+tools: [read_file, write_file, list_files, run_tests, send_message, read_contracts]
+rules:
+  - Never edit the code under test; report problems in your summary instead
+  - Cover edge cases and error paths, not only the happy path
+budget: { max_tokens: 200000, max_minutes: 20 }
+done_when: The tests in tests/ pass against the current backend
+test_cmd: python -m pytest -q tests

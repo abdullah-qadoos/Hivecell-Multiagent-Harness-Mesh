@@ -1,0 +1,35 @@
+[project]
+name = "hivecell"
+version = "0.1.0"
+description = "Multi-agent coding harness with rules enforced in code, plus Axonmesh, its MCP coordination layer"
+readme = "README.md"
+requires-python = ">=3.13"  # PurePath.full_match for ** globs
+dependencies = [
+    "anthropic>=0.40",
+    "openai>=1.50",
+    "pyyaml>=6",
+    "pydantic>=2",
+    "mcp>=2.3.0",
+    "psutil>=7.2.2",
+    "pywebview>=6.2.1",
+]
+
+[project.scripts]
+hivecell = "hivecell.cli:main"
+axon = "axonmesh.cli:main"
+
+[project.gui-scripts]
+hivecell-app = "hivecell.app:main"  # no console window
+
+[dependency-groups]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]  # benchmarks/*/acceptance_test.py are hidden tests, run only by the benchmark
+
+[tool.hatch.build.targets.wheel]
+packages = ["hivecell", "axonmesh"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

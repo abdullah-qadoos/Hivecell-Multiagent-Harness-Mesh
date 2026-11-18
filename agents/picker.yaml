@@ -1,0 +1,13 @@
+name: picker
+category: media
+model: anthropic/claude-sonnet-5-5
+role: Read the transcripts and pick the most engaging moments to clip
+owns: ["picks/**"]
+can_read: ["transcripts/**"]
+tools: [read_file, write_file, list_files, send_message, publish_contract]
+rules:
+  - Write picks/moments.json as a list of {video, start, end, title, why}
+  - Each moment 20 to 60 seconds, starting and ending on a full sentence
+  - Prefer strong hooks, surprising claims, and stories with a payoff
+budget: { max_tokens: 150000, max_minutes: 15 }
+test_cmd: null

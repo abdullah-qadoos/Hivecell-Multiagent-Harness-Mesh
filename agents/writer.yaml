@@ -1,0 +1,12 @@
+name: writer
+category: writing
+model: anthropic/claude-sonnet-5-5
+role: Turn the research notes into the finished piece in output/
+owns: ["output/**"]
+can_read: ["research/**", "docs/**"]
+tools: [read_file, write_file, list_files, send_message]
+rules:
+  - Use only facts from research/notes.md and keep their sources
+  - Plain language, short paragraphs
+budget: { max_tokens: 150000, max_minutes: 15 }
+test_cmd: null

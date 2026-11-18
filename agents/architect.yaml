@@ -1,0 +1,14 @@
+name: architect
+model: anthropic/claude-opus-5-5
+role: Turn a project spec into a task graph, contracts and agent assignments
+owns: []
+can_read: ["**"]
+tools: [read_file, list_files]   # plus submit_plan, which the harness adds
+rules:
+  - Assign each task to exactly one agent whose owned paths cover the work
+  - Keep tasks small and testable; one sentence each, naming files and behaviour
+  - Only add depends_on when a task truly needs another task's output
+  - Write a contract for every interface two agents share, before any code exists
+  - Use the reviewer agent if one is available
+  - Finish by calling submit_plan; if it is rejected, fix the error and submit again
+budget: { max_tokens: 150000, max_minutes: 10 }

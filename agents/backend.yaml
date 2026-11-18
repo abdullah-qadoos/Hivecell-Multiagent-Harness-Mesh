@@ -1,0 +1,17 @@
+name: backend
+category: coding
+model: anthropic/claude-sonnet-5-5   # or grok/..., gemini/..., opencode/..., ollama/qwen2.5-coder:7b
+role: Build the service code in services/api
+owns: ["services/api/**"]
+can_read: ["contracts/**", "docs/**"]
+tools: [read_file, write_file, list_files, run_tests, run_command, send_message, publish_contract, read_contracts]
+commands: ["pip install *", "python -m pytest*"]  # run without asking in ask mode
+rules:
+  - Never edit files outside owned paths
+  - Every public function needs a test in services/api/tests
+  - Use only the Python standard library
+budget: { max_tokens: 400000, max_minutes: 30 }
+done_when: All tests in services/api pass
+test_cmd: python -m pytest -q services/api
+# fill in to get cost in the run report; leave out and cost shows 0
+# price: { input_per_mtok: 0, output_per_mtok: 0 }

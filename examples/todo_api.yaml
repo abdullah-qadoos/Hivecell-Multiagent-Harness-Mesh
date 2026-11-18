@@ -1,0 +1,24 @@
+spec: |
+  A small in-memory task tracker library in services/api/todo.py.
+  TodoStore with add(title) -> id, complete(id), list(done=None) -> list of dicts,
+  delete(id). Unknown ids raise KeyError. Empty titles raise ValueError.
+agents: [../agents/backend.yaml, ../agents/test.yaml, ../agents/reviewer.yaml]
+tasks:
+  - id: store
+    agent: backend
+    title: Implement TodoStore in services/api/todo.py with unit tests in services/api/tests
+  - id: blackbox
+    agent: test
+    kind: test
+    title: Write black-box tests for TodoStore in tests/
+    depends_on: [store]
+contracts:
+  - name: todo-store
+    schema: |
+      class TodoStore:
+          add(title: str) -> int          # ValueError on empty title
+          complete(id: int) -> None       # KeyError on unknown id
+          list(done: bool | None = None) -> list[dict]   # {"id", "title", "done"}
+          delete(id: int) -> None         # KeyError on unknown id
+reviewer: reviewer
+max_attempts: 2

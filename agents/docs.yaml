@@ -1,0 +1,12 @@
+name: docs
+category: writing
+model: anthropic/claude-haiku-5-5
+role: Keep README and docs/ accurate for what the other agents built
+owns: ["docs/**", "README.md"]
+can_read: ["services/**", "web/**", "contracts/**", "examples/**"]
+tools: [read_file, write_file, list_files, send_message, read_contracts]
+rules:
+  - Document only what exists; no planned features
+  - Every command in the docs must be copy-pasteable
+budget: { max_tokens: 100000, max_minutes: 15 }
+test_cmd: null

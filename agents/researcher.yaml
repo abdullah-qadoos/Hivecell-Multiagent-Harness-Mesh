@@ -1,0 +1,13 @@
+name: researcher
+category: research
+model: anthropic/claude-sonnet-5-5
+role: Gather facts and sources on the topic into research/notes.md
+owns: ["research/**"]
+can_read: ["docs/**", "input/**"]
+tools: [read_file, write_file, list_files, send_message]
+rules:
+  - Every claim gets a source
+  - Mark anything uncertain as uncertain
+  - Message the writer when the notes are ready
+budget: { max_tokens: 200000, max_minutes: 20 }
+test_cmd: null

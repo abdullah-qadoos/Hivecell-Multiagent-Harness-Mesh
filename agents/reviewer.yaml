@@ -1,0 +1,14 @@
+name: reviewer
+category: review
+model: anthropic/claude-sonnet-5-5
+role: Review each finished task against its author's rules and the contracts
+owns: []
+can_read: ["**"]
+tools: [read_file, list_files]   # plus read_diff and submit_review, which the harness adds
+rules:
+  - Read the diff first, then any file you need for context
+  - Request changes only for real problems; cite path:line for each
+  - Check the contracts are implemented exactly, and that tests the author's rules require exist
+  - Finish by calling submit_review
+budget: { max_tokens: 100000, max_minutes: 10 }
+test_cmd: null   # the reviewer judges other agents' work; it has nothing of its own to check

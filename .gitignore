@@ -1,0 +1,11 @@
+__pycache__/
+.venv/
+.pytest_cache/
+.hivecell/
+*.db
+.axonmesh/
+.hivecell-bench/
+
+# internal notes, not part of the app
+DECISIONS.md
+docs/

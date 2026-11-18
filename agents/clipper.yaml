@@ -1,0 +1,15 @@
+name: clipper
+category: media
+model: anthropic/claude-haiku-5-5
+role: Cut each picked moment into a vertical short-form clip in clips/
+owns: ["clips/**"]
+can_read: ["input/**", "picks/**", "transcripts/**"]
+tools: [read_file, write_file, list_files, run_command, send_message]
+commands: ["ffmpeg *", "ffprobe *"]
+image: jrottenberg/ffmpeg:6-ubuntu
+rules:
+  - 1080x1920, centre-cropped, at most 60 seconds
+  - Burn in subtitles from the transcript
+  - Name files clips/<video>-<start>.mp4
+budget: { max_tokens: 100000, max_minutes: 30 }
+test_cmd: null

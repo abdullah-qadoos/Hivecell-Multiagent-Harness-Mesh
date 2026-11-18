@@ -1,0 +1,14 @@
+name: frontend
+category: coding
+model: anthropic/claude-sonnet-5-5
+role: Build the web UI in web/ against the published API contracts
+owns: ["web/**"]
+can_read: ["contracts/**", "docs/**"]
+tools: [read_file, write_file, list_files, run_tests, run_command, send_message, read_contracts]
+commands: ["npm install*", "npm test*", "npm run build*"]
+image: node:22-slim
+rules:
+  - Only call endpoints that exist in the contracts; ask backend if one is missing
+  - Every component gets a test
+budget: { max_tokens: 400000, max_minutes: 30 }
+test_cmd: npm test --prefix web

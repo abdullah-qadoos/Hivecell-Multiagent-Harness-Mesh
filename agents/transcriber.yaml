@@ -1,0 +1,14 @@
+name: transcriber
+category: media
+model: anthropic/claude-haiku-5-5
+role: Transcribe every video in input/ to a timestamped transcript in transcripts/
+owns: ["transcripts/**"]
+can_read: ["input/**"]
+tools: [read_file, write_file, list_files, run_command, send_message]
+commands: ["whisper *", "ffprobe *"]
+image: python:3.13-slim
+rules:
+  - One transcript per video, as JSON segments with start, end and text
+  - Message the picker when all transcripts are ready
+budget: { max_tokens: 100000, max_minutes: 30 }
+test_cmd: null
